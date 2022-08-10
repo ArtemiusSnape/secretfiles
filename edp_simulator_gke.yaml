@@ -1,0 +1,381 @@
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: edp1-simulator-deployment
+      labels:
+        app: edp1-simulator-app
+        app.kubernetes.io/name: edp1-simulator
+        app.kubernetes.io/part-of: halo-cmms
+        app.kubernetes.io/component: simulator
+      annotations:
+        system: simulator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: edp1-simulator-app
+      template:
+        metadata:
+          labels:
+            app: edp1-simulator-app
+        spec:
+          restartPolicy: Always
+          containers:
+            - name: edp1-simulator-container
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
+              args:
+                - --tls-cert-file=/var/run/secrets/files/edp1_tls.pem
+                - --tls-key-file=/var/run/secrets/files/edp1_tls.key
+                - --cert-collection-file=/var/run/secrets/files/all_root_certs.pem
+                - --data-provider-resource-name=dataProviders/X1jglh9reTE
+                - --data-provider-display-name=edp1
+                - --data-provider-encryption-private-keyset=/var/run/secrets/files/edp1_enc_private.tink
+                - --data-provider-consent-signaling-private-key-der-file=/var/run/secrets/files/edp1_cs_private.der
+                - --data-provider-consent-signaling-certificate-der-file=/var/run/secrets/files/edp1_cs_cert.der
+                - --mc-resource-name=measurementConsumers/Cm3r3R9rcjg
+                - --kingdom-public-api-target=kingdomv2.anapoc.comscore.com:8443
+                - --kingdom-public-api-cert-host=localhost
+                - --requisition-fulfillment-service-target=worker1.anapoc.comscore.com:8443
+                - --requisition-fulfillment-service-cert-host=localhost
+                - --google-cloud-storage-project=pxm-dev-334514
+                - --google-cloud-storage-bucket=dev_edps_demo_bucket
+                - --snowflake-table-name=anapoc_dev.public.labelled_events
+              ports: []
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: edp1-simulator-files
+                  mountPath: /var/run/secrets/files
+                  readOnly: true
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: ""
+          volumes:
+            - name: edp1-simulator-files
+              secret:
+                secretName: certs-and-configs-9t742g68f5
+          initContainers: []
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: edp2-simulator-deployment
+      labels:
+        app: edp2-simulator-app
+        app.kubernetes.io/name: edp2-simulator
+        app.kubernetes.io/part-of: halo-cmms
+        app.kubernetes.io/component: simulator
+      annotations:
+        system: simulator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: edp2-simulator-app
+      template:
+        metadata:
+          labels:
+            app: edp2-simulator-app
+        spec:
+          restartPolicy: Always
+          containers:
+            - name: edp2-simulator-container
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
+              args:
+                - --tls-cert-file=/var/run/secrets/files/edp2_tls.pem
+                - --tls-key-file=/var/run/secrets/files/edp2_tls.key
+                - --cert-collection-file=/var/run/secrets/files/all_root_certs.pem
+                - --data-provider-resource-name=dataProviders/XtbAIOCUhac
+                - --data-provider-display-name=edp2
+                - --data-provider-encryption-private-keyset=/var/run/secrets/files/edp2_enc_private.tink
+                - --data-provider-consent-signaling-private-key-der-file=/var/run/secrets/files/edp2_cs_private.der
+                - --data-provider-consent-signaling-certificate-der-file=/var/run/secrets/files/edp2_cs_cert.der
+                - --mc-resource-name=measurementConsumers/Cm3r3R9rcjg
+                - --kingdom-public-api-target=kingdomv2.anapoc.comscore.com:8443
+                - --kingdom-public-api-cert-host=localhost
+                - --requisition-fulfillment-service-target=worker1.anapoc.comscore.com:8443
+                - --requisition-fulfillment-service-cert-host=localhost
+                - --google-cloud-storage-project=pxm-dev-334514
+                - --google-cloud-storage-bucket=dev_edps_demo_bucket
+                - --snowflake-table-name=anapoc_dev.public.labelled_events
+              ports: []
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: edp2-simulator-files
+                  mountPath: /var/run/secrets/files
+                  readOnly: true
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: ""
+          volumes:
+            - name: edp2-simulator-files
+              secret:
+                secretName: certs-and-configs-9t742g68f5
+          initContainers: []
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: edp3-simulator-deployment
+      labels:
+        app: edp3-simulator-app
+        app.kubernetes.io/name: edp3-simulator
+        app.kubernetes.io/part-of: halo-cmms
+        app.kubernetes.io/component: simulator
+      annotations:
+        system: simulator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: edp3-simulator-app
+      template:
+        metadata:
+          labels:
+            app: edp3-simulator-app
+        spec:
+          restartPolicy: Always
+          containers:
+            - name: edp3-simulator-container
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
+              args:
+                - --tls-cert-file=/var/run/secrets/files/edp3_tls.pem
+                - --tls-key-file=/var/run/secrets/files/edp3_tls.key
+                - --cert-collection-file=/var/run/secrets/files/all_root_certs.pem
+                - --data-provider-resource-name=dataProviders/FF6PPOCUhTY
+                - --data-provider-display-name=edp3
+                - --data-provider-encryption-private-keyset=/var/run/secrets/files/edp3_enc_private.tink
+                - --data-provider-consent-signaling-private-key-der-file=/var/run/secrets/files/edp3_cs_private.der
+                - --data-provider-consent-signaling-certificate-der-file=/var/run/secrets/files/edp3_cs_cert.der
+                - --mc-resource-name=measurementConsumers/Cm3r3R9rcjg
+                - --kingdom-public-api-target=kingdomv2.anapoc.comscore.com:8443
+                - --kingdom-public-api-cert-host=localhost
+                - --requisition-fulfillment-service-target=worker1.anapoc.comscore.com:8443
+                - --requisition-fulfillment-service-cert-host=localhost
+                - --google-cloud-storage-project=pxm-dev-334514
+                - --google-cloud-storage-bucket=dev_edps_demo_bucket
+                - --snowflake-table-name=anapoc_dev.public.labelled_events
+              ports: []
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: edp3-simulator-files
+                  mountPath: /var/run/secrets/files
+                  readOnly: true
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: ""
+          volumes:
+            - name: edp3-simulator-files
+              secret:
+                secretName: certs-and-configs-9t742g68f5
+          initContainers: []
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: edp4-simulator-deployment
+      labels:
+        app: edp4-simulator-app
+        app.kubernetes.io/name: edp4-simulator
+        app.kubernetes.io/part-of: halo-cmms
+        app.kubernetes.io/component: simulator
+      annotations:
+        system: simulator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: edp4-simulator-app
+      template:
+        metadata:
+          labels:
+            app: edp4-simulator-app
+        spec:
+          restartPolicy: Always
+          containers:
+            - name: edp4-simulator-container
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
+              args:
+                - --tls-cert-file=/var/run/secrets/files/edp4_tls.pem
+                - --tls-key-file=/var/run/secrets/files/edp4_tls.key
+                - --cert-collection-file=/var/run/secrets/files/all_root_certs.pem
+                - --data-provider-resource-name=dataProviders/a0zq3h9re4g
+                - --data-provider-display-name=edp4
+                - --data-provider-encryption-private-keyset=/var/run/secrets/files/edp4_enc_private.tink
+                - --data-provider-consent-signaling-private-key-der-file=/var/run/secrets/files/edp4_cs_private.der
+                - --data-provider-consent-signaling-certificate-der-file=/var/run/secrets/files/edp4_cs_cert.der
+                - --mc-resource-name=measurementConsumers/Cm3r3R9rcjg
+                - --kingdom-public-api-target=kingdomv2.anapoc.comscore.com:8443
+                - --kingdom-public-api-cert-host=localhost
+                - --requisition-fulfillment-service-target=worker1.anapoc.comscore.com:8443
+                - --requisition-fulfillment-service-cert-host=localhost
+                - --google-cloud-storage-project=pxm-dev-334514
+                - --google-cloud-storage-bucket=dev_edps_demo_bucket
+                - --snowflake-table-name=anapoc_dev.public.labelled_events
+              ports: []
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: edp4-simulator-files
+                  mountPath: /var/run/secrets/files
+                  readOnly: true
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: ""
+          volumes:
+            - name: edp4-simulator-files
+              secret:
+                secretName: certs-and-configs-9t742g68f5
+          initContainers: []
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: edp5-simulator-deployment
+      labels:
+        app: edp5-simulator-app
+        app.kubernetes.io/name: edp5-simulator
+        app.kubernetes.io/part-of: halo-cmms
+        app.kubernetes.io/component: simulator
+      annotations:
+        system: simulator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: edp5-simulator-app
+      template:
+        metadata:
+          labels:
+            app: edp5-simulator-app
+        spec:
+          restartPolicy: Always
+          containers:
+            - name: edp5-simulator-container
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
+              args:
+                - --tls-cert-file=/var/run/secrets/files/edp5_tls.pem
+                - --tls-key-file=/var/run/secrets/files/edp5_tls.key
+                - --cert-collection-file=/var/run/secrets/files/all_root_certs.pem
+                - --data-provider-resource-name=dataProviders/WDRnV-CUhBM
+                - --data-provider-display-name=edp5
+                - --data-provider-encryption-private-keyset=/var/run/secrets/files/edp5_enc_private.tink
+                - --data-provider-consent-signaling-private-key-der-file=/var/run/secrets/files/edp5_cs_private.der
+                - --data-provider-consent-signaling-certificate-der-file=/var/run/secrets/files/edp5_cs_cert.der
+                - --mc-resource-name=measurementConsumers/Cm3r3R9rcjg
+                - --kingdom-public-api-target=kingdomv2.anapoc.comscore.com:8443
+                - --kingdom-public-api-cert-host=localhost
+                - --requisition-fulfillment-service-target=worker1.anapoc.comscore.com:8443
+                - --requisition-fulfillment-service-cert-host=localhost
+                - --google-cloud-storage-project=pxm-dev-334514
+                - --google-cloud-storage-bucket=dev_edps_demo_bucket
+                - --snowflake-table-name=anapoc_dev.public.labelled_events
+              ports: []
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: edp5-simulator-files
+                  mountPath: /var/run/secrets/files
+                  readOnly: true
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: ""
+          volumes:
+            - name: edp5-simulator-files
+              secret:
+                secretName: certs-and-configs-9t742g68f5
+          initContainers: []
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: edp6-simulator-deployment
+      labels:
+        app: edp6-simulator-app
+        app.kubernetes.io/name: edp6-simulator
+        app.kubernetes.io/part-of: halo-cmms
+        app.kubernetes.io/component: simulator
+      annotations:
+        system: simulator
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: edp6-simulator-app
+      template:
+        metadata:
+          labels:
+            app: edp6-simulator-app
+        spec:
+          restartPolicy: Always
+          containers:
+            - name: edp6-simulator-container
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
+              args:
+                - --tls-cert-file=/var/run/secrets/files/edp6_tls.pem
+                - --tls-key-file=/var/run/secrets/files/edp6_tls.key
+                - --cert-collection-file=/var/run/secrets/files/all_root_certs.pem
+                - --data-provider-resource-name=dataProviders/EaZfZR9rfF8
+                - --data-provider-display-name=edp6
+                - --data-provider-encryption-private-keyset=/var/run/secrets/files/edp6_enc_private.tink
+                - --data-provider-consent-signaling-private-key-der-file=/var/run/secrets/files/edp6_cs_private.der
+                - --data-provider-consent-signaling-certificate-der-file=/var/run/secrets/files/edp6_cs_cert.der
+                - --mc-resource-name=measurementConsumers/Cm3r3R9rcjg
+                - --kingdom-public-api-target=kingdomv2.anapoc.comscore.com:8443
+                - --kingdom-public-api-cert-host=localhost
+                - --requisition-fulfillment-service-target=worker1.anapoc.comscore.com:8443
+                - --requisition-fulfillment-service-cert-host=localhost
+                - --google-cloud-storage-project=pxm-dev-334514
+                - --google-cloud-storage-bucket=dev_edps_demo_bucket
+                - --snowflake-table-name=anapoc_dev.public.labelled_events
+              ports: []
+              imagePullPolicy: Always
+              volumeMounts:
+                - name: edp6-simulator-files
+                  mountPath: /var/run/secrets/files
+                  readOnly: true
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 400m
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: ""
+          volumes:
+            - name: edp6-simulator-files
+              secret:
+                secretName: certs-and-configs-9t742g68f5 
+          initContainers: []
