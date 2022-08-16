@@ -25,7 +25,7 @@ items:
           restartPolicy: Always
           containers:
             - name: edp1-simulator-container
-              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator:snowflake
+              image: gcr.io/pxm-dev-334514/loadtest/edp-simulator
               args:
                 - --tls-cert-file=/var/run/secrets/files/edp1_tls.pem
                 - --tls-key-file=/var/run/secrets/files/edp1_tls.key
