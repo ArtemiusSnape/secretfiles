@@ -42,7 +42,7 @@ items:
                 - --requisition-fulfillment-service-cert-host=localhost
                 - --google-cloud-storage-project=pxm-dev-334514
                 - --google-cloud-storage-bucket=dev_edps_demo_bucket
-                - --snowflake-table-name=anapoc_dev.public.labelled_events
+                - --postgre-table-name=anapoc_dev.public.labelled_events
               ports: []
               imagePullPolicy: Always
               volumeMounts:
@@ -105,7 +105,7 @@ items:
                 - --requisition-fulfillment-service-cert-host=localhost
                 - --google-cloud-storage-project=pxm-dev-334514
                 - --google-cloud-storage-bucket=dev_edps_demo_bucket
-                - --snowflake-table-name=anapoc_dev.public.labelled_events
+                - --postgre-table-name=anapoc_dev.public.labelled_events
               ports: []
               imagePullPolicy: Always
               volumeMounts:
@@ -168,7 +168,7 @@ items:
                 - --requisition-fulfillment-service-cert-host=localhost
                 - --google-cloud-storage-project=pxm-dev-334514
                 - --google-cloud-storage-bucket=dev_edps_demo_bucket
-                - --snowflake-table-name=anapoc_dev.public.labelled_events
+                - --postgre-table-name=anapoc_dev.public.labelled_events
               ports: []
               imagePullPolicy: Always
               volumeMounts:
@@ -231,7 +231,7 @@ items:
                 - --requisition-fulfillment-service-cert-host=localhost
                 - --google-cloud-storage-project=pxm-dev-334514
                 - --google-cloud-storage-bucket=dev_edps_demo_bucket
-                - --snowflake-table-name=anapoc_dev.public.labelled_events
+                - --postgre-table-name=anapoc_dev.public.labelled_events
               ports: []
               imagePullPolicy: Always
               volumeMounts:
@@ -294,7 +294,7 @@ items:
                 - --requisition-fulfillment-service-cert-host=localhost
                 - --google-cloud-storage-project=pxm-dev-334514
                 - --google-cloud-storage-bucket=dev_edps_demo_bucket
-                - --snowflake-table-name=anapoc_dev.public.labelled_events
+                - --postgre-table-name=anapoc_dev.public.labelled_events
               ports: []
               imagePullPolicy: Always
               volumeMounts:
@@ -357,7 +357,7 @@ items:
                 - --requisition-fulfillment-service-cert-host=localhost
                 - --google-cloud-storage-project=pxm-dev-334514
                 - --google-cloud-storage-bucket=dev_edps_demo_bucket
-                - --snowflake-table-name=anapoc_dev.public.labelled_events
+                - --postgre-table-name=anapoc_dev.public.labelled_events
               ports: []
               imagePullPolicy: Always
               volumeMounts:
